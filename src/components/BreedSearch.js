@@ -29,7 +29,7 @@ export const BreedSearch = ({ setBreed }) => {
 }
 
 BreedSearch.propTypes = {
-	setCategories: PropTypes.func.isRequired
+	setBreed: PropTypes.func.isRequired
 }
 
 export default BreedSearch;
