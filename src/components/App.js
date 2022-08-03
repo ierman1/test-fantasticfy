@@ -7,7 +7,7 @@ const App = () => {
 
     const [breed, setBreed] = useState([]);
     const [order, setOrder] = useState([true]);
-    const [selectedImage, setSelectedImage] = useState([]);
+    const [selectedImage, setSelectedImage] = useState(null);
 
     return (
         <>
@@ -18,7 +18,7 @@ const App = () => {
 
             <hr/>
 
-            <div class="wrapper">
+            <div className="wrapper">
                 <BreedList order={ order } filter={ breed } setSelectedImage={ setSelectedImage } />
                 <ImagePreview url={ selectedImage }/>
             </div>

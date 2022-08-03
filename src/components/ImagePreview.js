@@ -2,7 +2,7 @@ export const ImagePreview = ({ url }) => {
 
 	return (
 		<>
-			<div class="segunda_columna">
+			<div className="segunda_columna">
                 {
                     (url && <img src={ url } />)
                 }
