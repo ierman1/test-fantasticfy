@@ -1,19 +1,25 @@
+import { useEffect } from "react";
 import { useFetchImages } from "../hooks/useFetchImages";
 
-export const Breed = ({ breed }) => {
+export const Breed = ({ breed, hidden, setSelectedImage }) => {
     
-	const { images, loading } = useFetchImages(breed.key);
+	const { images, loading, fetch } = useFetchImages(breed.key);
+
+    useEffect(() => {
+        fetch()
+    }, [])
 
 	return (
-		<div className="breed">
+		<div className={ breed.key + (hidden ? ' hidden' : '') }>
             <h3>{ breed.key }</h3>
             { loading && <p>Loading...</p> }
                 <div className="images">
                 {
-                    images.splice(0, 3).map((image, index) => (
-                        <img height="100"
+                    images.slice(0).splice(0, 3).map((image, index) => (
+                        <img
                             src={ image } 
-                            key={ index } />
+                            key={ index }
+                            onClick={ () => { setSelectedImage(image) } } />
                     ))
                 }
                 </div>

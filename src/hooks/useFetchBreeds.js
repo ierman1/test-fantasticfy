@@ -1,16 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import axios from 'axios';
 
 export const useFetchBreeds = () => {
 
-    const [state, setState] = useState({
-        breeds: [],
-        loading: true
-    });
+    const fetch = () => {
+        console.log('Fetching breeds...')
 
-    useEffect(() => {
 		axios.get('https://dog.ceo/api/breeds/list/all')
             .then(({ data }) => {
+                console.log('Done.')
+
                 const breeds = [];
 
                 Object.keys(data.message).forEach(breed => {
@@ -22,7 +21,13 @@ export const useFetchBreeds = () => {
                     loading: false
                 })
             })
-	}, []);
+	}
+
+    const [state, setState] = useState({
+        breeds: [],
+        loading: true,
+        fetch
+    });
 
     return state;
 

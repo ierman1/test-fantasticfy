@@ -1,16 +1,26 @@
+import { useEffect } from 'react';
+import { useFetchBreeds } from '../hooks/useFetchBreeds';
 import Breed from './Breed';
 
-export const BreedList = ({ breeds, loading }) => {
-    
+export const BreedList = ({ order, filter, setSelectedImage }) => {
+	
+	const { breeds, loading, fetch } = useFetchBreeds();
+
+	useEffect(() => {
+		fetch();
+	}, [])
+
 	return (
 		<>
 			{ loading && <p>Loading...</p> }
 			<div className="general">
 			{ 
-                breeds.map((breed, index) => (
+                breeds.sort((a, b) => (order ? a.key.localeCompare(b.key) : b.key.localeCompare(a.key))).map(breed => (
                     <Breed
-                        key={ index }
-                        breed={ breed } />
+                        key={ breed.key }
+                        breed={ breed } 
+						hidden={ !breed.key.includes(filter) }
+						setSelectedImage={ setSelectedImage } />
                 ))
             }
 			</div>

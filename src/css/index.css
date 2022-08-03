@@ -1,0 +1,17 @@
+.hidden {
+    display: none;
+}
+
+.wrapper {
+    display: flex;
+}
+
+.general img {
+    cursor: pointer;
+    height: 100px;
+    margin-right: 1rem;
+}
+
+.segunda_columa img {
+    width: 50%;
+}
