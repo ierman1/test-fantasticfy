@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 export const ImagePreview = ({ url }) => {
 
 	return (
@@ -10,6 +12,11 @@ export const ImagePreview = ({ url }) => {
 		</>
 	);
 
+}
+
+// PropTypes for ImagePreview
+ImagePreview.propTypes = {
+	url: PropTypes.string
 }
 
 export default ImagePreview;
