@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types'
 
-export const BreedSearch = ({ setBreed }) => {
+export const BreedSearch = ({ setBreed, setInitialLetter }) => {
 
 	// Handles the input change, updating the breed on the parent component
 	const handleInputChange = (e) => {
 		setBreed(e.target.value);
+		setInitialLetter(null);
 	}
 
 	return (
@@ -16,7 +17,8 @@ export const BreedSearch = ({ setBreed }) => {
 
 // PropTypes for BreedSearch
 BreedSearch.propTypes = {
-	setBreed: PropTypes.func.isRequired
+	setBreed: PropTypes.func.isRequired,
+	setInitialLetter: PropTypes.func.isRequired
 }
 
 export default BreedSearch;

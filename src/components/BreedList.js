@@ -1,31 +1,30 @@
-import { useEffect } from 'react';
 import PropTypes from 'prop-types'
-import { useFetchBreeds } from '../hooks/useFetchBreeds';
+import { useEffect } from 'react';
 import Breed from './Breed';
 
-export const BreedList = ({ order, filter, setSelectedImage }) => {
+export const BreedList = ({ breeds, loading, order, initialLetter, filter, setSelectedImage }) => {
 	
-	const { breeds, loading, fetch } = useFetchBreeds();
-
-	// useEffect hook to fetch the data only when the element renders for the first time
 	useEffect(() => {
-		fetch();
-	}, [])
-
+	  console.log(breeds.filter(breed => breed.key.includes(filter)))
+	}, [breeds])
+	
+	
 	return (
 		<>
 			{ loading && <p>Loading...</p> }
 			<div className="general">
-			{ 
-				// Sorting the array comparing the key of each breed and printing them
-                breeds.sort((a, b) => (order ? a.key.localeCompare(b.key) : b.key.localeCompare(a.key))).map(breed => (
-                    <Breed
-                        key={ breed.key }
-                        breed={ breed } 
-						hidden={ !breed.key.includes(filter) }
-						setSelectedImage={ setSelectedImage } />
-                ))
-            }
+				{ 
+					// Sorting the array comparing the key of each breed and printing them
+					breeds
+						.filter(breed => (initialLetter ? breed.key.includes(filter) && breed.key[0] == initialLetter : breed.key.includes(filter)))
+						.sort((a, b) => (order ? a.key.localeCompare(b.key) : b.key.localeCompare(a.key)))
+						.map(breed => (
+							<Breed
+								key={ breed.key }
+								breed={ breed }
+								setSelectedImage={ setSelectedImage } />
+					))
+				}
 			</div>
 		</>
 	);
@@ -34,7 +33,10 @@ export const BreedList = ({ order, filter, setSelectedImage }) => {
 
 // PropTypes for BreedSearch
 BreedList.propTypes = {
+	breeds: PropTypes.array.isRequired,
+	loading: PropTypes.bool.isRequired,
 	order: PropTypes.bool.isRequired,
+	initialLetter: PropTypes.string,
 	filter: PropTypes.string.isRequired,
 	setSelectedImage: PropTypes.func.isRequired
 }

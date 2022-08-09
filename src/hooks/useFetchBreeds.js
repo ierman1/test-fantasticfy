@@ -13,7 +13,16 @@ export const useFetchBreeds = () => {
                 const breeds = [];
 
                 Object.keys(data.message).forEach(breed => {
-					breeds.push({ key: breed, subBreeds: data.message[breed] })
+                    let object = { key: breed, subBreeds: data.message[breed] };
+
+                    console.log('Fetching images for: ' + breed)
+
+                    axios.get(`https://dog.ceo/api/breed/${breed}/images`)
+                        .then(({ data }) => {
+                            object.images = data.message;
+                            console.log('Done.')
+					        breeds.push(object)
+                        })
                 }) 
 
                 setState({
