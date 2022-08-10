@@ -49,7 +49,7 @@ const App = () => {
                     initialLetter={ initialLetter } 
                     filter={ breed } 
                     setSelectedImage={ setSelectedImage } />
-                <ImagePreview url={ selectedImage }/>
+                <ImagePreview url={ selectedImage } />
             </div>
         </>
     );

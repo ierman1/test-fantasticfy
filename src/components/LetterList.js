@@ -4,9 +4,10 @@ export const LetterList = ({ list, setInitialLetter }) => {
 
 	return (
 		<div className="letter-list">
+			<button onClick={ () => { setInitialLetter(null) } }>Reiniciar</button>
 			{
-                list.map(letter => (
-                    <button onClick={ () => { setInitialLetter(letter) } }>{ letter }</button>
+                list.map((letter, index) => (
+                    <button key={ index } onClick={ () => { setInitialLetter(letter) } }>{ letter }</button>
                 ))
             }
 		</div>
